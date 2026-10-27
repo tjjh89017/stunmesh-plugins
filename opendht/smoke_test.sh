@@ -3,9 +3,9 @@
 #
 # Drives the actual shell script with canned exec-protocol JSON on stdin
 # against a throwaway local HTTP server standing in for the OpenDHT proxy,
-# the same way internal/plugin/exec_test.go drives
+# the same way stunmesh-go's internal/plugin/exec_test.go drives
 # testdata/exec_test_plugin.sh -- except here the plugin under test is the
-# real contrib script, not a fixture, so its hand-rolled JSON parsing
+# real plugin script, not a fixture, so its hand-rolled JSON parsing
 # (envelope base64/magic/ts decode) and multi-endpoint fallback run for
 # real.
 #

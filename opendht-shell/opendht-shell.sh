@@ -2,7 +2,7 @@
 #
 # OpenDHT Storage Plugin for stunmesh-go (shell protocol)
 #
-# Same DHT and wire format as contrib/opendht, but implemented for systems
+# Same DHT and wire format as the opendht plugin, but implemented for systems
 # without jq: busybox sh, sed, base64 and curl or wget are enough, which is
 # what an OpenWrt-class device ships by default.
 #
@@ -17,7 +17,7 @@
 #
 # IMPORTANT: dedup must stay false. OpenDHT values expire after 10 minutes;
 # skipping an unchanged publish lets the value expire and silently breaks the
-# mesh. See contrib/opendht/README.md.
+# mesh. See https://github.com/tjjh89017/stunmesh-plugins/tree/main/opendht.
 
 set -eu
 
@@ -83,7 +83,7 @@ case "$MAGIC" in
 	;;
 esac
 
-[ -n "$ENDPOINTS" ] || die "no -endpoint given; see contrib/opendht/README.md for suggested proxies"
+[ -n "$ENDPOINTS" ] || die "no -endpoint given; see https://github.com/tjjh89017/stunmesh-plugins/tree/main/opendht for suggested proxies"
 
 # Validate every endpoint up front, so a typo in the third one is not
 # discovered only when the first two happen to be down. Trailing slashes are

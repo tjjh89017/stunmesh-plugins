@@ -4,11 +4,11 @@
 # cloudflare-shell.sh calls curl against a hardcoded
 # https://api.cloudflare.com URL (there is no -endpoint override, unlike the
 # opendht plugins), so it cannot be pointed at a local mock server the way
-# contrib/opendht/smoke_test.sh is. Instead this test prepends a fake `curl`
+# opendht/smoke_test.sh is. Instead this test prepends a fake `curl`
 # to PATH: a stand-in for the one external dependency the script has, in the
-# same spirit as internal/plugin/exec_test.go substituting a fixture .sh for
-# a real plugin binary. The real cloudflare-shell.sh runs unmodified; only
-# the `curl` it shells out to is swapped.
+# same spirit as stunmesh-go's internal/plugin/exec_test.go substituting a
+# fixture .sh for a real plugin binary. The real cloudflare-shell.sh runs
+# unmodified; only the `curl` it shells out to is swapped.
 #
 # Requires: bash (the script uses [[ ]] conditionals and declares
 # `#!/bin/bash`, even though it doesn't use arrays), grep, sed.

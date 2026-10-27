@@ -23,22 +23,20 @@ This is an alternative to the Go-based [cloudflare plugin](../cloudflare/) that 
 
 ### From Source
 
+There are no prebuilt archives. Clone the repository and install the script:
+
 1. Build and install the script:
    ```bash
-   cd contrib/cloudflare-shell
+   git clone https://github.com/tjjh89017/stunmesh-plugins.git
+   cd stunmesh-plugins/cloudflare-shell
    make install
    # Or specify custom installation path:
    # make install PREFIX=/opt/local
    ```
 
-### From Release
-
-1. Download from GitHub releases and install:
+   The script needs no build step, so you can also copy it by hand:
    ```bash
-   # Extract from plugin archive
-   unzip stunmesh-plugins-linux-amd64-v1.4.0.zip
-   sudo mv stunmesh-cloudflare-shell /usr/local/bin/
-   sudo chmod +x /usr/local/bin/stunmesh-cloudflare-shell
+   sudo install -m 755 cloudflare-shell.sh /usr/local/bin/stunmesh-cloudflare-shell
    ```
 
 2. Get your Cloudflare API token:
@@ -144,4 +142,4 @@ echo -e "STUNMESH_ACTION=set\nSTUNMESH_KEY=testkey123\nSTUNMESH_VALUE=testvalue4
 
 - [Shell Plugin Protocol](https://docs.stunmesh.dev/plugins/shell-protocol)
 - [Go-based Cloudflare Plugin](../cloudflare/)
-- [Contrib Plugin Development Guide](../README.md)
+- [stunmesh-plugins overview](../README.md)

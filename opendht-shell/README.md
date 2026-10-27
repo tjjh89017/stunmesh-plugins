@@ -1,6 +1,6 @@
 # OpenDHT Plugin (Shell Version)
 
-The same OpenDHT storage as [`contrib/opendht`](../opendht/), reimplemented
+The same OpenDHT storage as [`opendht`](../opendht/), reimplemented
 for systems without `jq`: POSIX `sh`, `sed`, `base64` and `curl` **or** `wget`
 are enough. A default OpenWrt image (busybox + `uclient-fetch` as `wget`)
 qualifies as-is.
@@ -60,4 +60,4 @@ publish that keeps the value alive. See the
 
 Everything else — which proxies to trust, running your own, expiry, security
 model, performance — is identical to the exec version and documented once in
-[`contrib/opendht/README.md`](../opendht/README.md).
+[`opendht/README.md`](../opendht/README.md).

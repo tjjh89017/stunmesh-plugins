@@ -12,7 +12,7 @@ This is a standalone exec plugin for stunmesh that stores peer endpoint informat
 ## Building
 
 ```bash
-cd contrib/cloudflare
+cd cloudflare
 go build -o stunmesh-cloudflare
 ```
 
@@ -57,28 +57,12 @@ interfaces:
         plugin: cf1
 ```
 
-### Example 1b: Docker configuration
+### Docker
 
-When using the official Docker image, plugins are in PATH:
-
-```yaml
-plugins:
-  cf1:
-    type: exec
-    command: stunmesh-cloudflare  # No path needed in Docker
-    args:
-      - "-zone"
-      - "example.com"
-      - "-token"
-      - "your_cloudflare_api_token"
-
-interfaces:
-  wg0:
-    peers:
-      peer1:
-        public_key: "base64_encoded_key"
-        plugin: cf1
-```
+The official stunmesh-go Docker image does not ship this plugin. Use the
+built-in `cloudflare` plugin there (`type: builtin`, `name: cloudflare`), or
+mount a binary built from this directory into the container and point
+`command` at it.
 
 ### Example 2: With subdomain
 

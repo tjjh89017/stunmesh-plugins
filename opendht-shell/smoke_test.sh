@@ -1,7 +1,7 @@
 #!/bin/sh
 # Script-level smoke test for opendht-shell.sh (shell protocol).
 #
-# Same idea as contrib/opendht/smoke_test.sh, but drives the shell-protocol
+# Same idea as opendht/smoke_test.sh, but drives the shell-protocol
 # sibling: STUNMESH_ACTION/KEY/VALUE lines on stdin, raw value on stdout for
 # get, exit status for set. Exercises the same hand-rolled envelope parsing
 # (this variant decodes with sed instead of jq) and multi-endpoint fallback

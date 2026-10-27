@@ -1,5 +1,5 @@
-# Contrib plugins Makefile
-# Builds all plugins in the contrib directory
+# stunmesh-plugins Makefile
+# Runs each target in every top-level directory that has a Makefile
 
 # Auto-detect all plugin directories (directories with Makefile)
 PLUGINS := $(dir $(wildcard */Makefile))

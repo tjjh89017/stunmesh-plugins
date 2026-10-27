@@ -1,4 +1,4 @@
-module github.com/tjjh89017/stunmesh-go/contrib/cloudflare
+module github.com/tjjh89017/stunmesh-plugins/cloudflare
 
 go 1.26.0
 
@@ -17,4 +17,4 @@ require (
 	golang.org/x/time v0.14.0 // indirect
 )
 
-// replace github.com/tjjh89017/stunmesh-go => ../../
+// replace github.com/tjjh89017/stunmesh-go => ../../stunmesh-go

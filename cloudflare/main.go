@@ -189,8 +189,8 @@ func respondSuccess(w io.Writer, value string) {
 		Value:   value,
 	}
 	// A failed Encode here means the caller never gets a parsable envelope
-	// at all (internal/plugin/exec.go's Decode then fails), so surface it
-	// on stderr rather than let it pass unnoticed.
+	// at all (Decode in stunmesh-go's internal/plugin/exec.go then fails), so
+	// surface it on stderr rather than let it pass unnoticed.
 	if err := json.NewEncoder(w).Encode(resp); err != nil {
 		fmt.Fprintf(os.Stderr, "failed to encode response: %v\n", err)
 		os.Exit(1)

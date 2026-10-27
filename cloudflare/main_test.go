@@ -195,7 +195,7 @@ func TestCloudflarePlugin_Set_UpdatesExistingRecord(t *testing.T) {
 
 // TestRespondEnvelopes checks the wire-level shape of the exec protocol
 // responses this plugin emits, matching pluginapi.ExecResponse (the same
-// struct the ExecPlugin caller in internal/plugin decodes).
+// struct the ExecPlugin caller in stunmesh-go's internal/plugin decodes).
 func TestRespondEnvelopes(t *testing.T) {
 	t.Run("success envelope", func(t *testing.T) {
 		data, err := json.Marshal(pluginapi.ExecResponse{Success: true, Value: "abc"})
@@ -228,9 +228,10 @@ func TestRespondEnvelopes(t *testing.T) {
 
 // TestMain_MissingFlags is a real process-level smoke test: it builds and
 // runs the actual binary, the same way exec_test_plugin.sh is driven from
-// internal/plugin/exec_test.go, and asserts on its stdout envelope and exit
-// code. It deliberately omits -zone/-token, which main() rejects before
-// ever touching the network or reading stdin, so the test can run offline.
+// stunmesh-go's internal/plugin/exec_test.go, and asserts on its stdout
+// envelope and exit code. It deliberately omits -zone/-token, which main()
+// rejects before ever touching the network or reading stdin, so the test can
+// run offline.
 func TestMain_MissingFlags(t *testing.T) {
 	bin := buildCloudflarePlugin(t)
 
