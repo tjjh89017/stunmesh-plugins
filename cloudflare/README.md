@@ -162,4 +162,4 @@ name.
 
 ## License
 
-Same as stunmesh-go main project.
+Apache-2.0. See [LICENSE](../LICENSE).
