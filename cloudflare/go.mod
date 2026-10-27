@@ -4,17 +4,15 @@ go 1.26.0
 
 require (
 	github.com/cloudflare/cloudflare-go v0.119.0
-	github.com/tjjh89017/stunmesh-go v1.15.1
 	golang.org/x/crypto/x509roots/fallback v0.0.0-20261020153306-9f2b28d4331a
 )
 
 require (
 	github.com/goccy/go-json v0.10.5 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/stretchr/testify v1.12.0 // indirect
 	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/text v0.41.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 )
-
-// replace github.com/tjjh89017/stunmesh-go => ../../stunmesh-go

@@ -89,6 +89,3 @@ A new plugin goes in its own top-level directory with:
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
-
-The cloudflare plugin imports the `pluginapi` package of stunmesh-go, which
-is licensed LGPL-3.0-or-later.

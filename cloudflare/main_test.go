@@ -11,7 +11,6 @@ import (
 	"testing"
 
 	"github.com/cloudflare/cloudflare-go"
-	"github.com/tjjh89017/stunmesh-go/pluginapi"
 )
 
 func TestGetRecordName(t *testing.T) {
@@ -194,15 +193,14 @@ func TestCloudflarePlugin_Set_UpdatesExistingRecord(t *testing.T) {
 }
 
 // TestRespondEnvelopes checks the wire-level shape of the exec protocol
-// responses this plugin emits, matching pluginapi.ExecResponse (the same
-// struct the ExecPlugin caller in stunmesh-go's internal/plugin decodes).
+// responses this plugin emits, matching ExecResponse.
 func TestRespondEnvelopes(t *testing.T) {
 	t.Run("success envelope", func(t *testing.T) {
-		data, err := json.Marshal(pluginapi.ExecResponse{Success: true, Value: "abc"})
+		data, err := json.Marshal(ExecResponse{Success: true, Value: "abc"})
 		if err != nil {
 			t.Fatalf("Marshal() error = %v", err)
 		}
-		var resp pluginapi.ExecResponse
+		var resp ExecResponse
 		if err := json.Unmarshal(data, &resp); err != nil {
 			t.Fatalf("Unmarshal() error = %v", err)
 		}
@@ -212,11 +210,11 @@ func TestRespondEnvelopes(t *testing.T) {
 	})
 
 	t.Run("error envelope", func(t *testing.T) {
-		data, err := json.Marshal(pluginapi.ExecResponse{Success: false, Error: "boom"})
+		data, err := json.Marshal(ExecResponse{Success: false, Error: "boom"})
 		if err != nil {
 			t.Fatalf("Marshal() error = %v", err)
 		}
-		var resp pluginapi.ExecResponse
+		var resp ExecResponse
 		if err := json.Unmarshal(data, &resp); err != nil {
 			t.Fatalf("Unmarshal() error = %v", err)
 		}
@@ -243,7 +241,7 @@ func TestMain_MissingFlags(t *testing.T) {
 		t.Fatalf("expected non-zero exit, got success; output=%s", out)
 	}
 
-	var resp pluginapi.ExecResponse
+	var resp ExecResponse
 	if jsonErr := json.Unmarshal(out, &resp); jsonErr != nil {
 		t.Fatalf("output is not valid JSON: %v; output=%s", jsonErr, out)
 	}
@@ -275,7 +273,7 @@ func TestMain_MalformedStdinJSON(t *testing.T) {
 		t.Fatalf("handleRequest() exit code = 0, want non-zero for malformed JSON; output=%s", stdout.String())
 	}
 
-	var resp pluginapi.ExecResponse
+	var resp ExecResponse
 	if err := json.Unmarshal(stdout.Bytes(), &resp); err != nil {
 		t.Fatalf("output is not valid JSON: %v; output=%s", err, stdout.String())
 	}

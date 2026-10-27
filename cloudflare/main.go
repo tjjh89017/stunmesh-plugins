@@ -9,7 +9,6 @@ import (
 	"os"
 
 	"github.com/cloudflare/cloudflare-go"
-	"github.com/tjjh89017/stunmesh-go/pluginapi"
 )
 
 // CloudflarePlugin manages DNS TXT records in Cloudflare
@@ -146,21 +145,21 @@ func main() {
 // against a fake store without going through NewCloudflarePlugin, which
 // makes a real Cloudflare API call before stdin is ever read. Returns the
 // process exit code main() should use.
-func handleRequest(ctx context.Context, store pluginapi.Store, stdin io.Reader, stdout io.Writer) int {
+func handleRequest(ctx context.Context, store Store, stdin io.Reader, stdout io.Writer) int {
 	data, err := io.ReadAll(stdin)
 	if err != nil {
 		respondError(stdout, fmt.Errorf("failed to read stdin: %w", err))
 		return 1
 	}
 
-	var req pluginapi.ExecRequest
+	var req ExecRequest
 	if err := json.Unmarshal(data, &req); err != nil {
 		respondError(stdout, fmt.Errorf("failed to parse request: %w", err))
 		return 1
 	}
 
 	switch req.Action {
-	case pluginapi.OpGet:
+	case OpGet:
 		value, err := store.Get(ctx, req.Key)
 		if err != nil {
 			respondError(stdout, err)
@@ -168,7 +167,7 @@ func handleRequest(ctx context.Context, store pluginapi.Store, stdin io.Reader, 
 		}
 		respondSuccess(stdout, value)
 
-	case pluginapi.OpSet:
+	case OpSet:
 		if err := store.Set(ctx, req.Key, req.Value); err != nil {
 			respondError(stdout, err)
 			return 1
@@ -184,7 +183,7 @@ func handleRequest(ctx context.Context, store pluginapi.Store, stdin io.Reader, 
 }
 
 func respondSuccess(w io.Writer, value string) {
-	resp := pluginapi.ExecResponse{
+	resp := ExecResponse{
 		Success: true,
 		Value:   value,
 	}
@@ -198,7 +197,7 @@ func respondSuccess(w io.Writer, value string) {
 }
 
 func respondError(w io.Writer, err error) {
-	resp := pluginapi.ExecResponse{
+	resp := ExecResponse{
 		Success: false,
 		Error:   err.Error(),
 	}

@@ -33,12 +33,9 @@ Smoke tests need `curl`, `python3` and `jq`. They run offline.
 - The protocols are defined by stunmesh-go and documented at
   https://docs.stunmesh.dev/plugins/exec-protocol and
   https://docs.stunmesh.dev/plugins/shell-protocol.
-- `cloudflare/` imports `github.com/tjjh89017/stunmesh-go/pluginapi` at a
-  published version. Dependabot opens a PR when stunmesh-go releases; to
-  bump by hand, run `go get github.com/tjjh89017/stunmesh-go@vX.Y.Z && go
-  mod tidy` in `cloudflare/`.
-- To test against a local stunmesh-go checkout, uncomment the `replace`
-  line in `cloudflare/go.mod`. Do not commit it uncommented.
+- `cloudflare/` carries its own copy of the protocol types
+  (`cloudflare/protocol.go`) and has no dependency on stunmesh-go. Keep them
+  in step with the documented protocol by hand.
 
 ## Commits
 
