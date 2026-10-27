@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: cloudflare/go.mod
+          cache-dependency-path: cloudflare/go.sum
+      # opendht/smoke_test.sh needs jq; the mock servers need python3.
+      - name: Check smoke test dependencies
+        run: |
+          command -v jq >/dev/null || { sudo apt-get update && sudo apt-get install -y jq; }
+          jq --version
+          python3 --version
+      - run: make test
+
+  build:
+    name: Build (${{ matrix.goos }}/${{ matrix.goarch }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - goos: linux
+            goarch: amd64
+          - goos: linux
+            goarch: arm64
+          - goos: darwin
+            goarch: arm64
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: cloudflare/go.mod
+          cache-dependency-path: cloudflare/go.sum
+      - run: make -C cloudflare build GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }}
