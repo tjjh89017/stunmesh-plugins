@@ -105,8 +105,8 @@ skips the publish when the endpoint is unchanged — which is exactly when it
 must not be skipped, since nothing else refreshes the value. The mesh would
 keep working for up to 10 minutes and then quietly stop.
 
-This is the case the "expiring/TTL backends" warning in the root `CLAUDE.md`
-is about.
+This is the case the warning about expiring/TTL backends in the stunmesh-go
+`dedup` documentation is about.
 
 ## How it works
 
