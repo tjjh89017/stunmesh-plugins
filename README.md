@@ -61,6 +61,19 @@ The protocols are documented at docs.stunmesh.dev:
 - [Exec plugin protocol](https://docs.stunmesh.dev/plugins/exec-protocol)
 - [Shell plugin protocol](https://docs.stunmesh.dev/plugins/shell-protocol)
 
+Identity fields arrive with stunmesh-go v1.16.0 and are absent on older
+releases, so scripts must treat them as optional. Each is omitted (exec) or
+empty (shell) when unknown.
+
+| Exec JSON field    | Shell variable               | Meaning                                  |
+|--------------------|------------------------------|------------------------------------------|
+| `device`           | `STUNMESH_DEVICE`            | WireGuard device name (shell: single-quoted, control characters removed) |
+| `local_public_key` | `STUNMESH_LOCAL_PUBLIC_KEY`  | Local WireGuard public key, base64       |
+| `peer_public_key`  | `STUNMESH_PEER_PUBLIC_KEY`   | Peer WireGuard public key, base64        |
+
+The response format is unchanged. Old scripts that ignore unknown fields keep
+working.
+
 Use [`cloudflare/`](cloudflare/) as the reference for an exec plugin in Go,
 and [`opendht-shell/`](opendht-shell/) for a shell plugin.
 
