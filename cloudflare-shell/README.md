@@ -77,7 +77,15 @@ The script uses the shell plugin protocol:
    STUNMESH_ACTION=get
    STUNMESH_KEY=3061b8fcbdb6972059518f1adc3590dca6a5f352
    STUNMESH_VALUE=abc123...  # for set only
+   STUNMESH_DEVICE='wg0'  # single-quoted, empty when unknown
+   STUNMESH_LOCAL_PUBLIC_KEY=base64...  # empty when unknown
+   STUNMESH_PEER_PUBLIC_KEY=base64...  # empty when unknown
    ```
+
+   The last three variables arrive with stunmesh-go v1.16.0 and are absent on
+   older releases, so treat them as optional. This script ignores them. A
+   script could use `STUNMESH_DEVICE` or `STUNMESH_PEER_PUBLIC_KEY` to build a
+   per-device or per-peer DNS record name.
 
 2. **Output**:
    - For `get`: Prints value to stdout

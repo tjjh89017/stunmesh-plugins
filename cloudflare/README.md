@@ -99,7 +99,10 @@ When stunmesh needs to retrieve peer endpoint data:
 ```json
 {
   "action": "get",
-  "key": "peer_identifier"
+  "key": "peer_identifier",
+  "device": "wg0",
+  "local_public_key": "base64...",
+  "peer_public_key": "base64..."
 }
 ```
 
@@ -110,6 +113,11 @@ When stunmesh needs to retrieve peer endpoint data:
   "value": "encrypted_endpoint_data"
 }
 ```
+
+The `device`, `local_public_key` and `peer_public_key` fields arrive with
+stunmesh-go v1.16.0, are omitted when unknown, and are absent on older
+releases. This plugin ignores them. A plugin could use `device` or
+`peer_public_key` to build a per-device or per-peer DNS record name.
 
 ### Set Operation
 
